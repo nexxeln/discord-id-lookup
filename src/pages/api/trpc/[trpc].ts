@@ -6,15 +6,22 @@ import { z } from "zod";
 export const appRouter = trpc
   .router()
   .transformer(superjson)
-  .query("hello", {
-    input: z
-      .object({
-        text: z.string().nullish(),
-      })
-      .nullish(),
-    resolve({ input }) {
+  .query("lookup", {
+    input: z.object({
+      id: z.string().nullish(),
+    }),
+    async resolve({ input }) {
+      if (!input?.id) return;
+
+      const userData = await fetch(
+        `https://discord.com/api/v10/users/${input.id}`,
+        {
+          headers: { Authorization: `Bot ${process.env.DISCORD_TOKEN}` },
+        }
+      ).then((res) => res.json());
+
       return {
-        greeting: `Hello ${input?.text ?? "world"}`,
+        userData,
       };
     },
   });
