@@ -1,8 +1,17 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import { useState } from "react";
+
+import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   const [id, setId] = useState<string | null>(null);
+
+  const data = trpc.useQuery(["lookup", { id }], {
+    refetchOnReconnect: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -17,6 +26,38 @@ const Home: NextPage = () => {
         value={id ?? ""}
         onChange={(event) => setId(event.target.value.trim() || null)}
       />
+
+      {data.data && (
+        <>
+          <div className="mt-10" />
+          <div className="flex flex-col items-center justify-center">
+            <div className="mt-4" />
+            <h1 className="text-sky-500 font-medium">
+              <span className="text-3xl">{data.data.userData.username}</span>
+
+              <span className="text-xl">
+                #{data.data.userData.discriminator}
+              </span>
+            </h1>
+            <div className="mt-4" />
+            <Image
+              src={`https://cdn.discordapp.com/avatars/${data.data.userData.id}/${data.data.userData.avatar}.png?size=2048`}
+              className="rounded-full h-32 w-32"
+              alt={`${data.data.userData.username} avatar`}
+              width={128}
+              height={128}
+            />
+
+            <div className="mt-4" />
+            <p className="text-sky-400">
+              Public Flags:{" "}
+              <code className="text-sky-800 bg-sky-200 rounded-md p-[2px]">
+                {data.data.userData.public_flags}
+              </code>
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };
