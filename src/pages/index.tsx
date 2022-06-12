@@ -41,7 +41,7 @@ const Home: NextPage = () => {
             </h1>
             <div className="mt-4" />
             <Image
-              src={`https://cdn.discordapp.com/avatars/${data.data.userData.id}/${data.data.userData.avatar}.png?size=2048`}
+              src={`https://cdn.discordapp.com/avatars/${data.data.userData.id}/${data.data.userData.avatar}?size=2048`}
               className="rounded-full h-32 w-32"
               alt={`${data.data.userData.username} avatar`}
               width={128}
