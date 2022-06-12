@@ -11,7 +11,7 @@ export const appRouter = trpc
       id: z.string().nullish(),
     }),
     async resolve({ input }) {
-      if (!input?.id) return;
+      if (!input?.id) return null;
 
       const userData = await fetch(
         `https://discord.com/api/v10/users/${input.id}`,
