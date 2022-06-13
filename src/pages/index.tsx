@@ -4,30 +4,7 @@ import { useState } from "react";
 import * as HoverCard from "@radix-ui/react-hover-card";
 
 import { trpc } from "../utils/trpc";
-
-const getFlagName = (flag: string) => {
-  if (flag === "balance") {
-    return "HypeSquad Balance";
-  } else if (flag === "bravery") {
-    return "HypeSquad Bravery";
-  } else if (flag === "brilliance") {
-    return "HypeSquad Brilliance";
-  } else if (flag === "bug-hunter-1" || flag === "bug-hunter-2") {
-    return "Discord Bug Hunter";
-  } else if (flag === "dev") {
-    return "Early Verified Bot Developer";
-  } else if (flag == "events") {
-    return "HypeSquad Events";
-  } else if (flag === "moderator") {
-    return "Discord Certified Moderator";
-  } else if (flag === "partner") {
-    return "Partnered Server Owner";
-  } else if (flag === "staff") {
-    return "Discord Staff";
-  } else if (flag === "supporter") {
-    return "Early Supporter";
-  }
-};
+import { getFlagName } from "../helpers/getFlagName";
 
 const Home: NextPage = () => {
   const [id, setId] = useState<string | null>(null);
