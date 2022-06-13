@@ -57,8 +57,8 @@ const Home: NextPage = () => {
                       <Image
                         src={`/images/${flag}.png`}
                         alt={flag}
-                        width={28}
-                        height={28}
+                        width={32}
+                        height={32}
                       />
                     </div>
                   </HoverCard.Trigger>
