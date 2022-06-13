@@ -21,7 +21,11 @@ export const appRouter = trpc
       ).then((res) => res.json());
 
       return {
-        userData,
+        id: userData.id,
+        username: userData.username,
+        discriminator: userData.discriminator,
+        avatar: userData.avatar,
+        public_flags: userData.public_flags,
       };
     },
   });

@@ -33,17 +33,15 @@ const Home: NextPage = () => {
           <div className="flex flex-col items-center justify-center">
             <div className="mt-4" />
             <h1 className="text-sky-500 font-medium">
-              <span className="text-3xl">{data.data.userData.username}</span>
+              <span className="text-3xl">{data.data.username}</span>
 
-              <span className="text-xl">
-                #{data.data.userData.discriminator}
-              </span>
+              <span className="text-xl">#{data.data.discriminator}</span>
             </h1>
             <div className="mt-4" />
             <Image
-              src={`https://cdn.discordapp.com/avatars/${data.data.userData.id}/${data.data.userData.avatar}?size=2048`}
+              src={`https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}?size=2048`}
               className="rounded-full h-32 w-32"
-              alt={`${data.data.userData.username} avatar`}
+              alt={`${data.data.username} avatar`}
               width={128}
               height={128}
             />
@@ -52,7 +50,7 @@ const Home: NextPage = () => {
             <p className="text-sky-400">
               Public Flags:{" "}
               <code className="text-sky-800 bg-sky-200 rounded-md p-[2px]">
-                {data.data.userData.public_flags}
+                {data.data.public_flags}
               </code>
             </p>
           </div>
