@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import * as HoverCard from "@radix-ui/react-hover-card";
@@ -16,63 +17,85 @@ const Home: NextPage = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="mt-4" />
-      <h1 className="text-sky-700 text-3xl font-medium">Discord ID Lookup</h1>
+    <>
+      <Head>
+        <title>Discord Lookup</title>
+        <meta name="robots" content="follow, index" />
+        <meta name="description" content="A tool to lookup Discord IDs" />
+        <meta property="og:site_name" content="Discord ID Lookup" />
+        <meta
+          property="og:description"
+          content="A tool to lookup Discord IDs"
+        />
+        <meta property="og:image" content="/images/banner.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#0284C7" />
+        <meta name="twitter:title" content="Discord ID Lookup" />
+        <meta
+          name="twitter:description"
+          content="A tool to lookup Discord IDs"
+        />
+        <meta name="twitter:image" content="/images/banner.png" />
+      </Head>
 
-      <div className="mt-10" />
-      <input
-        type="text"
-        placeholder="User ID"
-        className="bg-dark-700 rounded-md px-4 py-2 transition focus:(outline-none ring-2 ring-sky-600)"
-        value={id ?? ""}
-        onChange={(event) => setId(event.target.value.trim() || null)}
-      />
+      <div className="flex flex-col items-center justify-center">
+        <div className="mt-4" />
+        <h1 className="text-sky-700 text-3xl font-medium">Discord ID Lookup</h1>
 
-      {data.data && (
-        <>
-          <div className="mt-10" />
-          <div className="flex flex-col items-center justify-center">
-            <div className="mt-4" />
-            <h1 className="text-sky-500 font-medium">
-              <span className="text-3xl">{data.data.username}</span>
+        <div className="mt-10" />
+        <input
+          type="text"
+          placeholder="User ID"
+          className="bg-dark-700 rounded-md px-4 py-2 transition focus:(outline-none ring-2 ring-sky-600)"
+          value={id ?? ""}
+          onChange={(event) => setId(event.target.value.trim() || null)}
+        />
 
-              <span className="text-xl">#{data.data.discriminator}</span>
-            </h1>
-            <div className="mt-4" />
-            <Image
-              src={`https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}?size=2048`}
-              className="rounded-full h-32 w-32"
-              alt={`${data.data.username} avatar`}
-              width={128}
-              height={128}
-            />
+        {data.data && (
+          <>
+            <div className="mt-10" />
+            <div className="flex flex-col items-center justify-center">
+              <div className="mt-4" />
+              <h1 className="text-sky-500 font-medium">
+                <span className="text-3xl">{data.data.username}</span>
 
-            <div className="mt-4" />
-            <div className="flex gap-5">
-              {data.data.public_flags.map((flag) => (
-                <HoverCard.Root openDelay={250} closeDelay={150}>
-                  <HoverCard.Trigger>
-                    <div className="cursor-help">
-                      <Image
-                        src={`/images/${flag}.png`}
-                        alt={flag}
-                        width={32}
-                        height={32}
-                      />
-                    </div>
-                  </HoverCard.Trigger>
-                  <HoverCard.Content>
-                    <span className="text-sm">{getBadgeName(flag)}</span>
-                    <HoverCard.Arrow />
-                  </HoverCard.Content>
-                </HoverCard.Root>
-              ))}
+                <span className="text-xl">#{data.data.discriminator}</span>
+              </h1>
+              <div className="mt-4" />
+              <Image
+                src={`https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}?size=2048`}
+                className="rounded-full h-32 w-32"
+                alt={`${data.data.username} avatar`}
+                width={128}
+                height={128}
+              />
+
+              <div className="mt-4" />
+              <div className="flex gap-5">
+                {data.data.public_flags.map((flag) => (
+                  <HoverCard.Root openDelay={250} closeDelay={150}>
+                    <HoverCard.Trigger>
+                      <div className="cursor-help">
+                        <Image
+                          src={`/images/${flag}.png`}
+                          alt={flag}
+                          width={32}
+                          height={32}
+                        />
+                      </div>
+                    </HoverCard.Trigger>
+                    <HoverCard.Content>
+                      <span className="text-sm">{getBadgeName(flag)}</span>
+                      <HoverCard.Arrow />
+                    </HoverCard.Content>
+                  </HoverCard.Root>
+                ))}
+              </div>
             </div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
