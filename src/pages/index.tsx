@@ -4,7 +4,7 @@ import { useState } from "react";
 import * as HoverCard from "@radix-ui/react-hover-card";
 
 import { trpc } from "../utils/trpc";
-import { getFlagName } from "../helpers/getFlagName";
+import { getBadgeName } from "../helpers/getBadgeName";
 
 const Home: NextPage = () => {
   const [id, setId] = useState<string | null>(null);
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                     </div>
                   </HoverCard.Trigger>
                   <HoverCard.Content>
-                    <span className="text-sm">{getFlagName(flag)}</span>
+                    <span className="text-sm">{getBadgeName(flag)}</span>
                     <HoverCard.Arrow />
                   </HoverCard.Content>
                 </HoverCard.Root>

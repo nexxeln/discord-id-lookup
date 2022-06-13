@@ -1,4 +1,4 @@
-export const getFlagName = (flag: string) => {
+export const getBadgeName = (flag: string) => {
   switch (flag) {
     case "balance":
       return "HypeSquad Balance";
