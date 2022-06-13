@@ -47,12 +47,16 @@ const Home: NextPage = () => {
             />
 
             <div className="mt-4" />
-            <p className="text-sky-400">
-              Public Flags:{" "}
-              <code className="text-sky-800 bg-sky-200 rounded-md p-[2px]">
-                {data.data.public_flags.map((flag) => flag).join(", ")}
-              </code>
-            </p>
+            <div className="flex gap-2">
+              {data.data.public_flags.map((flag) => (
+                <Image
+                  src={`/images/${flag}.png`}
+                  alt={flag}
+                  width={28}
+                  height={28}
+                />
+              ))}
+            </div>
           </div>
         </>
       )}
