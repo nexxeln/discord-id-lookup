@@ -1,8 +1,33 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useState } from "react";
+import * as HoverCard from "@radix-ui/react-hover-card";
 
 import { trpc } from "../utils/trpc";
+
+const getFlagName = (flag: string) => {
+  if (flag === "balance") {
+    return "HypeSquad Balance";
+  } else if (flag === "bravery") {
+    return "HypeSquad Bravery";
+  } else if (flag === "brilliance") {
+    return "HypeSquad Brilliance";
+  } else if (flag === "bug-hunter-1" || flag === "bug-hunter-2") {
+    return "Discord Bug Hunter";
+  } else if (flag === "dev") {
+    return "Early Verified Bot Developer";
+  } else if (flag == "events") {
+    return "HypeSquad Events";
+  } else if (flag === "moderator") {
+    return "Discord Certified Moderator";
+  } else if (flag === "partner") {
+    return "Partnered Server Owner";
+  } else if (flag === "staff") {
+    return "Discord Staff";
+  } else if (flag === "supporter") {
+    return "Early Supporter";
+  }
+};
 
 const Home: NextPage = () => {
   const [id, setId] = useState<string | null>(null);
@@ -47,14 +72,24 @@ const Home: NextPage = () => {
             />
 
             <div className="mt-4" />
-            <div className="flex gap-2">
+            <div className="flex gap-4">
               {data.data.public_flags.map((flag) => (
-                <Image
-                  src={`/images/${flag}.png`}
-                  alt={flag}
-                  width={28}
-                  height={28}
-                />
+                <HoverCard.Root openDelay={250} closeDelay={150}>
+                  <HoverCard.Trigger>
+                    <div className="cursor-help">
+                      <Image
+                        src={`/images/${flag}.png`}
+                        alt={flag}
+                        width={28}
+                        height={28}
+                      />
+                    </div>
+                  </HoverCard.Trigger>
+                  <HoverCard.Content>
+                    <span className="text-sm">{getFlagName(flag)}</span>
+                    <HoverCard.Arrow />
+                  </HoverCard.Content>
+                </HoverCard.Root>
               ))}
             </div>
           </div>
