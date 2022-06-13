@@ -50,7 +50,7 @@ const Home: NextPage = () => {
             <p className="text-sky-400">
               Public Flags:{" "}
               <code className="text-sky-800 bg-sky-200 rounded-md p-[2px]">
-                {data.data.public_flags}
+                {data.data.public_flags.map((flag) => flag).join(", ")}
               </code>
             </p>
           </div>

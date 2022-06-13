@@ -4,25 +4,25 @@ import superjson from "superjson";
 import { z } from "zod";
 
 const badges = [
+  ["moderator", 262144],
   ["dev", 131072],
-  ["bug2", 16384],
+  ["bug-hunter-2", 16384],
   ["supporter", 512],
-  ["hNormie", 256],
-  ["hBrain", 128],
-  ["hBrave", 64],
-  ["bug1", 8],
-  ["hEvent", 4],
+  ["balance", 256],
+  ["brilliance", 128],
+  ["bravery", 64],
+  ["bug-hunter-1", 8],
+  ["events", 4],
   ["partner", 2],
   ["staff", 1],
 ];
-
-type Tuple = [string, number];
 
 const getBadges = (val: number) => {
   let result: string[] = [];
 
   badges.forEach(([name, a]: any) => {
     let value = Math.floor(val / a);
+
     if (value) {
       val -= value * a;
       result.push(name);
