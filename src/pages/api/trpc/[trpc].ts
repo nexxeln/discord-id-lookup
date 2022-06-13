@@ -3,6 +3,35 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { z } from "zod";
 
+const badges = [
+  ["dev", 131072],
+  ["bug2", 16384],
+  ["supporter", 512],
+  ["hNormie", 256],
+  ["hBrain", 128],
+  ["hBrave", 64],
+  ["bug1", 8],
+  ["hEvent", 4],
+  ["partner", 2],
+  ["staff", 1],
+];
+
+type Tuple = [string, number];
+
+const getBadges = (val: number) => {
+  let result: string[] = [];
+
+  badges.forEach(([name, a]: any) => {
+    let value = Math.floor(val / a);
+    if (value) {
+      val -= value * a;
+      result.push(name);
+    }
+  });
+
+  return result;
+};
+
 export const appRouter = trpc
   .router()
   .transformer(superjson)
@@ -20,12 +49,14 @@ export const appRouter = trpc
         }
       ).then((res) => res.json());
 
+      const publicFlags = getBadges(userData.public_flags);
+
       return {
         id: userData.id,
         username: userData.username,
         discriminator: userData.discriminator,
         avatar: userData.avatar,
-        public_flags: userData.public_flags,
+        public_flags: publicFlags,
       };
     },
   });
