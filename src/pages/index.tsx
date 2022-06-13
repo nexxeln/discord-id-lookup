@@ -49,7 +49,7 @@ const Home: NextPage = () => {
             />
 
             <div className="mt-4" />
-            <div className="flex gap-4">
+            <div className="flex gap-5">
               {data.data.public_flags.map((flag) => (
                 <HoverCard.Root openDelay={250} closeDelay={150}>
                   <HoverCard.Trigger>
