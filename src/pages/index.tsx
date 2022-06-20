@@ -65,14 +65,14 @@ const Home: NextPage = () => {
               <div className="mt-4" />
               <div className="rounded-full relative" data-tooltip="Click to copy image url" onClick={() => {
                 navigator.clipboard.writeText(`https://cdn.discordapp.com/avatars/${data.data!.id}/${data.data!.avatar}`);
-                toast.success("Copied to clipboard",  {
+                toast.success("Copied to clipboard" ,  {
                   style: {
                     background: "#262626",
-                    color: "cyan",
+                    color: "#e0f2fe",
                   },
                   iconTheme: {
-                    primary: "cyan",
-                    secondary: "#262626",
+                    primary: "skyblue",
+                    secondary: "#262626"
                   },
                 });
               }}>
