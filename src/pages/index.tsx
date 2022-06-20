@@ -73,22 +73,14 @@ const Home: NextPage = () => {
               <div className="mt-4" />
               <div className="flex gap-5">
                 {data.data.public_flags.map((flag) => (
-                  <HoverCard.Root openDelay={250} closeDelay={150}>
-                    <HoverCard.Trigger>
-                      <div className="cursor-help">
-                        <Image
-                          src={`/images/${flag}.png`}
-                          alt={flag}
-                          width={32}
-                          height={32}
-                        />
-                      </div>
-                    </HoverCard.Trigger>
-                    <HoverCard.Content>
-                      <span className="text-sm">{getBadgeName(flag)}</span>
-                      <HoverCard.Arrow />
-                    </HoverCard.Content>
-                  </HoverCard.Root>
+                  <div className="cursor-help relative tooltip" data-tooltip-location="bottom" data-tooltip={getBadgeName(flag)}>
+                    <Image
+                      src={`/images/${flag}.png`}
+                      alt={flag}
+                      width={32}
+                      height={32}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
