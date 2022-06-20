@@ -5,9 +5,15 @@ import "windi.css";
 
 import { AppRouter } from "./api/trpc/[trpc]";
 import "../styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Toaster />
+      <Component {...pageProps} />
+    </>
+  )
 };
 
 export default withTRPC<AppRouter>({

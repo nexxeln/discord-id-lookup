@@ -6,6 +6,7 @@ import * as HoverCard from "@radix-ui/react-hover-card";
 
 import { trpc } from "../utils/trpc";
 import { getBadgeName } from "../helpers/getBadgeName";
+import toast from "react-hot-toast";
 
 const Home: NextPage = () => {
   const [id, setId] = useState<string | null>(null);
@@ -62,33 +63,39 @@ const Home: NextPage = () => {
                 <span className="text-xl">#{data.data.discriminator}</span>
               </h1>
               <div className="mt-4" />
-              <Image
-                src={`https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}?size=2048`}
-                className="rounded-full h-32 w-32"
-                alt={`${data.data.username} avatar`}
-                width={128}
-                height={128}
-              />
+              <div className="rounded-full relative" data-tooltip="Click to copy image url" onClick={() => {
+                navigator.clipboard.writeText(`https://cdn.discordapp.com/avatars/${data.data!.id}/${data.data!.avatar}`);
+                toast.success("Copied to clipboard" ,  {
+                  style: {
+                    background: "#262626",
+                    color: "#e0f2fe",
+                  },
+                  iconTheme: {
+                    primary: "skyblue",
+                    secondary: "#262626"
+                  },
+                });
+              }}>
+                <Image
+                  src={`https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}?size=2048`}
+                  className="rounded-full h-32 w-32 avatar cursor-pointer"
+                  alt={`${data.data.username} avatar`}
+                  width={128}
+                  height={128}
+                />
+              </div>
 
               <div className="mt-4" />
               <div className="flex gap-5">
                 {data.data.public_flags.map((flag) => (
-                  <HoverCard.Root openDelay={250} closeDelay={150}>
-                    <HoverCard.Trigger>
-                      <div className="cursor-help">
-                        <Image
-                          src={`/images/${flag}.png`}
-                          alt={flag}
-                          width={32}
-                          height={32}
-                        />
-                      </div>
-                    </HoverCard.Trigger>
-                    <HoverCard.Content>
-                      <span className="text-sm">{getBadgeName(flag)}</span>
-                      <HoverCard.Arrow />
-                    </HoverCard.Content>
-                  </HoverCard.Root>
+                  <div className="cursor-help relative tooltip" data-tooltip-location="bottom" data-tooltip={getBadgeName(flag)}>
+                    <Image
+                      src={`/images/${flag}.png`}
+                      alt={flag}
+                      width={32}
+                      height={32}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
