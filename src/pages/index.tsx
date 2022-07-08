@@ -1,12 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import { useState } from "react";
-import * as HoverCard from "@radix-ui/react-hover-card";
-
 import { trpc } from "../utils/trpc";
 import { getBadgeName } from "../helpers/getBadgeName";
-import toast from "react-hot-toast";
 
 const Home: NextPage = () => {
   const [id, setId] = useState<string | null>(null);
@@ -63,19 +61,27 @@ const Home: NextPage = () => {
                 <span className="text-xl">#{data.data.discriminator}</span>
               </h1>
               <div className="mt-4" />
-              <div className="rounded-full relative" data-tooltip="Click to copy image url" onClick={() => {
-                navigator.clipboard.writeText(`https://cdn.discordapp.com/avatars/${data.data!.id}/${data.data!.avatar}`);
-                toast.success("Copied to clipboard" ,  {
-                  style: {
-                    background: "#262626",
-                    color: "#e0f2fe",
-                  },
-                  iconTheme: {
-                    primary: "skyblue",
-                    secondary: "#262626"
-                  },
-                });
-              }}>
+              <div
+                className="rounded-full relative"
+                data-tooltip="Click to copy image url"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `https://cdn.discordapp.com/avatars/${data.data!.id}/${
+                      data.data!.avatar
+                    }`
+                  );
+                  toast.success("Copied to clipboard", {
+                    style: {
+                      background: "#262626",
+                      color: "#e0f2fe",
+                    },
+                    iconTheme: {
+                      primary: "skyblue",
+                      secondary: "#262626",
+                    },
+                  });
+                }}
+              >
                 <Image
                   src={`https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}?size=2048`}
                   className="rounded-full h-32 w-32 avatar cursor-pointer"
@@ -88,7 +94,11 @@ const Home: NextPage = () => {
               <div className="mt-4" />
               <div className="flex gap-5">
                 {data.data.public_flags.map((flag) => (
-                  <div className="cursor-help relative tooltip" data-tooltip-location="bottom" data-tooltip={getBadgeName(flag)}>
+                  <div
+                    className="cursor-help relative tooltip"
+                    data-tooltip-location="bottom"
+                    data-tooltip={getBadgeName(flag)}
+                  >
                     <Image
                       src={`/images/${flag}.png`}
                       alt={flag}
