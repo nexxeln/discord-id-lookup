@@ -51,7 +51,7 @@ const Home: NextPage = () => {
           onChange={(event) => setId(event.target.value.trim() || null)}
         />
 
-        {data.data && (
+        {data.data?.discriminator ? (
           <>
             <div className="mt-10" />
             <div className="flex flex-col items-center justify-center">
@@ -93,6 +93,16 @@ const Home: NextPage = () => {
               </div>
             </div>
           </>
+        ) : (
+          <div className="mt-10 text-xl">
+            {id ? (
+              <span className="text-red-500">
+                {data.isLoading ? "" : "Please enter a valid id"}
+              </span>
+            ) : (
+              <span className="text-neutral-500">Waiting for input</span>
+            )}
+          </div>
         )}
       </div>
     </>
